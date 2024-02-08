@@ -19,4 +19,19 @@ public class UserRepository : IUserRepository
     {
         return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
     }
+
+    public Task<UserModel> Add()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<UserModel> Delete()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<UserModel> Update()
+    {
+        throw new NotImplementedException();
+    }
 }

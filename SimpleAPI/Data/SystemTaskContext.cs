@@ -15,6 +15,8 @@ public class SystemTaskContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfiguration(new UserMap());
+        modelBuilder.ApplyConfiguration(new TaskMap());
         base.OnModelCreating(modelBuilder);
     }
 }
