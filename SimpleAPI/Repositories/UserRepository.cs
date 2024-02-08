@@ -20,18 +20,32 @@ public class UserRepository : IUserRepository
         return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public Task<UserModel> Add()
+    public async Task<UserModel> Add(UserModel user)
     {
-        throw new NotImplementedException();
+        _dbContext.Users.Add(user);
+        _dbContext.SaveChanges();
+
+        return user;
     }
 
-    public Task<UserModel> Delete()
+    public async Task<UserModel> Delete(int id)
     {
-        throw new NotImplementedException();
+        UserModel user = await SearchUserById(id);
+        _dbContext.Remove(user);
+        _dbContext.SaveChanges();
+
+        return user;
     }
 
-    public Task<UserModel> Update()
+    public async Task<UserModel> Update(UserModel user)
     {
-        throw new NotImplementedException();
+        UserModel userModel = await SearchUserById(user.Id);
+        userModel.Name = user.Name;
+        userModel.Email = user.Email;
+
+        _dbContext.Users.Update(userModel);
+        _dbContext.SaveChanges();
+
+        return userModel;
     }
 }
